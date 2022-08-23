@@ -29,19 +29,33 @@ const list = [
   },
 ];
 
-//map > foreach(obj) => title
-const bookInfo = list.map((obj) => {
+function List() {
   return (
-    <li key={obj.objectID}>
-      <span>
-        <a href={obj.url}>Title: {obj.title}</a>
-      </span>
-      <span>Author: {obj.author}</span>
-      <span>Comments: {obj.num_comments}</span>
-      <span>Points: {obj.points}</span>
-    </li>
+    <ul>
+      {list.map((obj) => {
+        return (
+          <li key={obj.objectID}>
+            <span>
+              <a href={obj.url}>Title: {obj.title}</a>
+            </span>
+            <span>Author: {obj.author}</span>
+            <span>Comments: {obj.num_comments}</span>
+            <span>Points: {obj.points}</span>
+          </li>
+        );
+      })}
+    </ul>
   );
-});
+}
+
+function Search() {
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="input" type="text" />
+    </div>
+  );
+}
 
 function getTitle(title) {
   return title;
@@ -53,9 +67,8 @@ function App() {
       <h1>{getTitle(title)}</h1>
       <p>{welcome.message + welcome.name}</p>
       <ul>{arrList}</ul>
-      <ul>{bookInfo}</ul>
-      <label htmlFor="search">Search: </label>
-      <input id="input" type="text" />
+      <List />
+      <Search />
     </div>
   );
 }
