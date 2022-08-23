@@ -10,6 +10,39 @@ const welcome = {
 const numArr = [1, 2, 3, 4, 5];
 const arrList = numArr.map((num) => <li>{num}</li>);
 
+const list = [
+  {
+    title: "React",
+    url: "https://reactjs.org/",
+    author: "Jordan Walke",
+    num_comments: 3,
+    points: 4,
+    objectID: 0,
+  },
+  {
+    title: "Redux",
+    url: "https://redux.js.org/",
+    author: "Dan Abramov, Andrew Clark",
+    num_comments: 2,
+    points: 5,
+    objectID: 1,
+  },
+];
+
+//map > foreach(obj) => title
+const bookInfo = list.map((obj) => {
+  return (
+    <li key={obj.objectID}>
+      <span>
+        <a href={obj.url}>Title: {obj.title}</a>
+      </span>
+      <span>Author: {obj.author}</span>
+      <span>Comments: {obj.num_comments}</span>
+      <span>Points: {obj.points}</span>
+    </li>
+  );
+});
+
 function getTitle(title) {
   return title;
 }
@@ -20,6 +53,7 @@ function App() {
       <h1>{getTitle(title)}</h1>
       <p>{welcome.message + welcome.name}</p>
       <ul>{arrList}</ul>
+      <ul>{bookInfo}</ul>
       <label htmlFor="search">Search: </label>
       <input id="input" type="text" />
     </div>
