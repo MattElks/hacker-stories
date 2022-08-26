@@ -1,5 +1,21 @@
 import * as React from "react";
 
+/**
+ *        CUSTOM HOOK
+ * const useStorageState = (key, initialState) => {
+    const [value, setValue] = React.useState(
+      localStorage.getItem(key) || initialState
+    );
+
+    React.useEffect(() => {
+      localStorage.setItem(key, value);
+    }, [key, value]);
+
+    return [value, setValue];
+  };
+ * 
+ */
+
 const App = () => {
   const stories = [
     {
@@ -21,7 +37,7 @@ const App = () => {
   ];
 
   const [searchTerm, setSearchTerm] = React.useState(
-    localStorage.getItem("search") || "React"
+    localStorage.getItem("search") || "Search a title"
   );
 
   React.useEffect(() => {
@@ -54,13 +70,13 @@ const App = () => {
 
 const Search = ({ search, onSearch }) => {
   return (
-    <div>
+    <React.Fragment>
       <label htmlFor="search">Search: </label>
       <input id="input" type="text" value={search} onChange={onSearch} />
       <p>
         Searching for: <strong>{search}</strong>
       </p>
-    </div>
+    </React.Fragment>
   );
 };
 
