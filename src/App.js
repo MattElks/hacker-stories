@@ -35,7 +35,6 @@ const App = () => {
       objectID: 1,
     },
   ];
-
   const [searchTerm, setSearchTerm] = React.useState(
     localStorage.getItem("search") || "Search a title"
   );
@@ -47,6 +46,13 @@ const App = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  const [count, setCount] = React.useState(0);
+
+  const handleIncrement = () => setCount(count + 1);
+
+  const handleDecrement = () => setCount(count - 1);
+
   /* filter stories by search term */
   const filterList = stories.filter((story) =>
     story.title.toLowerCase().match(searchTerm.toLowerCase())
@@ -57,27 +63,53 @@ const App = () => {
 
       <InputWithLabel
         id="search"
-        label="Search"
-        type="text"
         value={searchTerm}
         onInputChange={handleSearch}
-      />
-
+      >
+        <strong>Search:</strong>
+      </InputWithLabel>
       <hr />
 
       <List list={filterList} />
+      {count}
+      <Button
+        id="button1"
+        buttonText="Increase count"
+        onClick={handleIncrement}
+      />
+      <Button
+        id="button2"
+        buttonText="decrease count"
+        onClick={handleDecrement}
+      />
     </div>
   );
 };
 
-const InputWithLabel = ({ id, label, type, value, onInputChange }) => {
+const InputWithLabel = ({
+  id,
+  children,
+  type = "text",
+  value,
+  onInputChange,
+}) => {
   return (
     <React.Fragment>
-      <label htmlFor={id}>{label}: </label>
+      <label htmlFor={id}>{children}</label>
       <input id={id} type={type} value={value} onChange={onInputChange} />
       <p>
         Searching for: <strong>{value}</strong>
       </p>
+    </React.Fragment>
+  );
+};
+/** PRACTICE BTN */
+const Button = ({ id, type = "button", buttonText, onClick, ...rest }) => {
+  return (
+    <React.Fragment>
+      <button id={id} type={type} onClick={onClick} {...rest}>
+        {buttonText}
+      </button>
     </React.Fragment>
   );
 };
